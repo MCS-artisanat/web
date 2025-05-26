@@ -12,7 +12,6 @@ const fs = require('fs');
 const keyFilePath = '/tmp/firebase-key.json';
 fs.writeFileSync(keyFilePath, Buffer.from(process.env.FIREBASE_KEY_BASE64, 'base64'));
 
-const admin = require('firebase-admin');
 const serviceAccount = require(keyFilePath);
 
 admin.initializeApp({
