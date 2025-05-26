@@ -7,10 +7,18 @@ const crypto    = require('crypto');
 const path      = require('path');
 
 // 1. Lancer la config Firebase (avec ton fichier de clé)
-const serviceAccount = require('./mcs-transitions-firebase-adminsdk-fbsvc-afe1494a57');
+const fs = require('fs');
+
+const keyFilePath = '/tmp/firebase-key.json';
+fs.writeFileSync(keyFilePath, Buffer.from(process.env.FIREBASE_KEY_BASE64, 'base64'));
+
+const admin = require('firebase-admin');
+const serviceAccount = require(keyFilePath);
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
 const db = admin.firestore(); // Si tu utilises Firestore
 //const db = admin.database(); // Si tu utilises le RTDB
 
