@@ -39,7 +39,17 @@ function signPayload(payload, secret) {
     .digest('hex');
 }
 
-
+//route pour stocker les formulaires
+app.post('/api/contacts', async (req, res) => {
+  try {
+    const data = req.body;
+    await db.collection('contacts').add(data); // Firestore
+    res.status(200).send({ message: 'Contact enregistré !' });
+  } catch (error) {
+    console.error('[Contact Error]', error);
+    res.status(500).send({ error: 'Erreur d’enregistrement' });
+  }
+});
 
 // Route pour stocker le consentement cookies
 app.post('/api/cookies', async (req, res) => {
