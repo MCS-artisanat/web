@@ -24,12 +24,6 @@ app.use(bodyParser.json());
 const WEBHOOK_URL    = process.env.WEBHOOK_URL || 'https://mcs-luxury.app.n8n.cloud/webhook/Formulaire';
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || 'SocieteCommercialeOuestAfricain22011921TCArcelorF50/';
 
-
-const PORT = process.env.PORT || 8080;
-
-app.use(cors());
-app.use(bodyParser.json());
-
 // Fonction utilitaire pour générer une signature HMAC
 function signPayload(payload, secret) {
   return crypto
