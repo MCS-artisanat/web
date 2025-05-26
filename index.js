@@ -43,13 +43,17 @@ function signPayload(payload, secret) {
 app.post('/api/contacts', async (req, res) => {
   try {
     const data = req.body;
-    await db.collection('contacts').add(data); // Firestore
-    res.status(200).send({ message: 'Contact enregistré !' });
+
+    // Enregistrement dans Firestore
+    await db.collection('contacts').add(data);
+
+    res.status(200).send({ message: 'Contact enregistré avec succès.' });
   } catch (error) {
-    console.error('[Contact Error]', error);
-    res.status(500).send({ error: 'Erreur d’enregistrement' });
+    console.error('[Contact API Error]', error);
+    res.status(500).send({ error: 'Erreur lors de l’enregistrement du contact' });
   }
 });
+
 
 // Route pour stocker le consentement cookies
 app.post('/api/cookies', async (req, res) => {
